@@ -7,9 +7,10 @@
 //  Copyright 2010 Instinctive Code.
 //  https://github.com/mattgemmell/MGSplitViewController
 
-using System.Drawing;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using Foundation;
+using UIKit;
+using System;
 
 namespace MTSplitViewControllerDemo
 {
@@ -29,7 +30,7 @@ namespace MTSplitViewControllerDemo
 		{
 			base.ViewDidLoad ();
 			this.ClearsSelectionOnViewWillAppear = false;
-			this.ContentSizeForViewInPopover = new SizeF(320f, 600f);
+			this.ContentSizeForViewInPopover = new CGSize(320f, 600f);
 			this.TableView.Source = new Source(this);
 		}
 		
@@ -56,12 +57,12 @@ namespace MTSplitViewControllerDemo
 			}
 			private RootViewController oController;
 			
-			public override int NumberOfSections (UITableView tableView)
+			public override nint NumberOfSections (UITableView tableView)
 			{
 				return 1;
 			}
 			
-			public override int RowsInSection (UITableView tableview, int section)
+			public override nint RowsInSection (UITableView tableview, nint section)
 			{
 				return 10;
 			}

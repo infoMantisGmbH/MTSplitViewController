@@ -8,29 +8,29 @@
 //  https://github.com/mattgemmell/MGSplitViewController
 
 using System;
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
+using UIKit;
+using Foundation;
 using System.Collections.Generic;
-using System.Drawing;
+using CoreGraphics;
 
 namespace MTSplitViewLib
 {
 	public class MTSplitViewController : UIViewController
 	{
 		// default width of master view in UISplitViewController.
-		public const float MG_DEFAULT_SPLIT_POSITION = 320.0f;
+		public static readonly nfloat MG_DEFAULT_SPLIT_POSITION = 320.0f;
 		// default width of split-gutter in UISplitViewController.
-		public const float MG_DEFAULT_SPLIT_WIDTH = 1.0f;
+		public static readonly nfloat MG_DEFAULT_SPLIT_WIDTH = 1.0f;
 		// default corner-radius of overlapping split-inner corners on the master and detail views.
-		public const float MG_DEFAULT_CORNER_RADIUS = 5.0f;
+		public static readonly nfloat MG_DEFAULT_CORNER_RADIUS = 5.0f;
 		// default color of intruding inner corners (and divider background).
 		public UIColor MG_DEFAULT_CORNER_COLOR = UIColor.Black;
 		// corner-radius of split-inner corners for MGSplitViewDividerStylePaneSplitter style.
-		public const float MG_PANESPLITTER_CORNER_RADIUS = 0.0f;		
+		public static readonly nfloat MG_PANESPLITTER_CORNER_RADIUS = 0.0f;		
 		// width of split-gutter for MGSplitViewDividerStylePaneSplitter style.
-		public const float MG_PANESPLITTER_SPLIT_WIDTH = 25.0f;	
+		public static readonly nfloat MG_PANESPLITTER_SPLIT_WIDTH = 25.0f;	
 		// minimum width a view is allowed to become as a result of changing the splitPosition.
-		public const float MG_MIN_VIEW_WIDTH = 200.0f;
+		public static readonly nfloat MG_MIN_VIEW_WIDTH = 200.0f;
 		
 		public MTSplitViewController () : base()
 		{
@@ -64,11 +64,11 @@ namespace MTSplitViewLib
 		/// <summary>
 		/// Will be triggered if the user wants to change the split position.
 		/// </summary>
-		public event Func<MTSplitViewController, float, SizeF, float> ConstrainSplitPosition;
+		public event Func<MTSplitViewController, nfloat, CGSize, nfloat> ConstrainSplitPosition;
 		/// <summary>
 		/// Will be triggered if the split position is moved.
 		/// </summary>
-		public event Action<MTSplitViewController, float> WillMoveSplitToPosition;
+		public event Action<MTSplitViewController, nfloat> WillMoveSplitToPosition;
 		/// <summary>
 		/// Will be triggered if the master view controller will be hidden.
 		/// </summary>
@@ -257,7 +257,7 @@ namespace MTSplitViewLib
 		/// <value>
 		/// The split position.
 		/// </value>
-		public float SplitPosition
+		public nfloat SplitPosition
 		{
 			get
 			{
@@ -267,8 +267,8 @@ namespace MTSplitViewLib
 			{
 				// Check to see if delegate wishes to constrain the position.
 				bool bConstrained = false;
-				SizeF oFullSize = this.SplitViewRectangleForOrientation (this.InterfaceOrientation).Size;
-				float fNewPos = value;
+				CGSize oFullSize = this.SplitViewRectangleForOrientation (this.InterfaceOrientation).Size;
+				var fNewPos = value;
 				if (this.ConstrainSplitPosition != null)
 				{
 					fNewPos = this.ConstrainSplitPosition (this, value, oFullSize);
@@ -277,8 +277,8 @@ namespace MTSplitViewLib
 				else
 				{
 					// Apply default constraints if delegate doesn't wish to participate.
-					float fMinPos = MG_MIN_VIEW_WIDTH;
-					float fMaxPos = ((this.IsVertical) ? oFullSize.Width : oFullSize.Height) - (MG_MIN_VIEW_WIDTH + this.SplitWidth);
+					var fMinPos = MG_MIN_VIEW_WIDTH;
+					var fMaxPos = ((this.IsVertical) ? oFullSize.Width : oFullSize.Height) - (MG_MIN_VIEW_WIDTH + this.SplitWidth);
 					bConstrained = (fNewPos != this.SplitPosition && fNewPos >= fMinPos && fNewPos <= fMaxPos);
 				}
 				if (bConstrained)
@@ -330,7 +330,7 @@ namespace MTSplitViewLib
 			}
 		}
 
-		private float fSplitPosition;
+		private nfloat fSplitPosition;
 		
 		/// <summary>
 		/// Gets or sets the width of the split.
@@ -338,7 +338,7 @@ namespace MTSplitViewLib
 		/// <value>
 		/// The width of the split.
 		/// </value>
-		public float SplitWidth
+		public nfloat SplitWidth
 		{
 			get
 			{
@@ -357,7 +357,7 @@ namespace MTSplitViewLib
 			}
 		}
 
-		private float fSplitWidth;
+		private nfloat fSplitWidth;
 		
 		/// <summary>
 		/// Whether to let the user drag the divider to alter the split position.
@@ -565,7 +565,7 @@ namespace MTSplitViewLib
 				this.eDividerStyle = value;
 	
 				// Reconfigure general appearance and behaviour.
-				float fCornerRadius = 0f;
+				nfloat fCornerRadius = 0f;
 				if (this.eDividerStyle == MTSplitDividerView.DIVIDER_STYLE.Thin)
 				{
 					fCornerRadius = MG_DEFAULT_CORNER_RADIUS;
@@ -743,7 +743,7 @@ namespace MTSplitViewLib
 			this.IsVertical = true;
 			this.MasterBeforeDetail = true;
 			this.SplitPosition = MG_DEFAULT_SPLIT_POSITION;
-			RectangleF oDivRect = this.View.Bounds;
+			CGRect oDivRect = this.View.Bounds;
 			if (this.IsVertical)
 			{
 				oDivRect.Y = this.SplitPosition;
@@ -932,7 +932,7 @@ namespace MTSplitViewLib
 		/// <param name='theOrientation'>
 		/// The orientation.
 		/// </param>
-		protected virtual RectangleF SplitViewRectangleForOrientation (UIInterfaceOrientation theOrientation)
+		protected virtual CGRect SplitViewRectangleForOrientation (UIInterfaceOrientation theOrientation)
 		{
 			return View.Bounds;
 		}
@@ -949,17 +949,17 @@ namespace MTSplitViewLib
 	
 			// Layout the master, detail and divider views appropriately, adding/removing subviews as needed.
 			// First obtain relevant geometry.
-			RectangleF oMainRect = this.SplitViewRectangleForOrientation (eOrientation);
-			SizeF oFullSize = oMainRect.Size;
-			float width = oFullSize.Width;
-			float height = oFullSize.Height;
+			CGRect oMainRect = this.SplitViewRectangleForOrientation (eOrientation);
+			CGSize oFullSize = oMainRect.Size;
+			var width = oFullSize.Width;
+			var height = oFullSize.Height;
 	
 #if DEBUG
 	//Console.WriteLine("Target orientation is " + this.NameOfInterfaceOrientation(eOrientation) + " dimensions will be " + width + " x " + height );
 #endif
 			
 			// Layout the master, divider and detail views.
-			RectangleF eNewFrame = oMainRect;// new RectangleF (0, 0, width, height);
+			CGRect eNewFrame = oMainRect;// new RectangleF (0, 0, width, height);
 			UIViewController oController;
 			UIView oView = null;
 			bool bShouldShowMaster = this.ShouldShowMasterForInterfaceOrientation (eOrientation);
@@ -967,9 +967,9 @@ namespace MTSplitViewLib
 			if (this.IsVertical)
 			{
 				// Master on left, detail on right (or vice versa).
-				RectangleF oMasterRect;
-				RectangleF oDividerRect;
-				RectangleF oDetailRect;
+				CGRect oMasterRect;
+				CGRect oDividerRect;
+				CGRect oDetailRect;
 				if (bMasterFirst)
 				{
 					if (!bShouldShowMaster)
@@ -1060,7 +1060,7 @@ namespace MTSplitViewLib
 			else
 			{
 				// Master above, detail below (or vice versa).
-				RectangleF oMasterRect, oDividerRect, oDetailRect;
+				CGRect oMasterRect, oDividerRect, oDetailRect;
 				if (bMasterFirst)
 				{
 					if (!bShouldShowMaster)
@@ -1155,7 +1155,7 @@ namespace MTSplitViewLib
 			MTSplitCornersView oTrailingCorners; // bottom/right of screen in vertical/horizontal split.
 			if (this.CornerViews == null)
 			{
-				RectangleF oCornerRect = new RectangleF (0, 0, 10, 10); // arbitrary, will be resized below.
+				CGRect oCornerRect = new CGRect (0, 0, 10, 10); // arbitrary, will be resized below.
 				oLeadingCorners = new MTSplitCornersView (oCornerRect);
 				oLeadingCorners.SplitViewController = this;
 				oLeadingCorners.CornerBackgroundColor = MG_DEFAULT_CORNER_COLOR;
@@ -1178,15 +1178,15 @@ namespace MTSplitViewLib
 			oLeadingCorners.AutoresizingMask = (this.IsVertical) ? UIViewAutoresizing.FlexibleBottomMargin : UIViewAutoresizing.FlexibleRightMargin;
 			oTrailingCorners.AutoresizingMask = (this.IsVertical) ? UIViewAutoresizing.FlexibleTopMargin : UIViewAutoresizing.FlexibleLeftMargin;
 	
-			float fX;
-			float fY;
-			float fCornersWidth;
-			float fCornersHeight;
+			nfloat fX;
+			nfloat fY;
+			nfloat fCornersWidth;
+			nfloat fCornersHeight;
 	
-			RectangleF oLeadingRect;
-			RectangleF oTrailingRect;
+			CGRect oLeadingRect;
+			CGRect oTrailingRect;
 			
-			float fRadius = oLeadingCorners.CornerRadius;
+			var fRadius = oLeadingCorners.CornerRadius;
 			if (this.IsVertical)
 			{
 				// left/right split
@@ -1209,8 +1209,8 @@ namespace MTSplitViewLib
 				}
 				fX -= fRadius;
 				fY = oMainRect.Top;
-				oLeadingRect = new RectangleF (fX, fY, fCornersWidth, fCornersHeight); // top corners
-				oTrailingRect = new RectangleF (fX, (height - fCornersHeight) + oMainRect.Top, fCornersWidth, fCornersHeight); // bottom corners
+				oLeadingRect = new CGRect (fX, fY, fCornersWidth, fCornersHeight); // top corners
+				oTrailingRect = new CGRect (fX, (height - fCornersHeight) + oMainRect.Top, fCornersWidth, fCornersHeight); // bottom corners
 		
 			}
 			else
@@ -1237,8 +1237,8 @@ namespace MTSplitViewLib
 				fY += oMainRect.Top;
 				fCornersWidth = fRadius;
 				fCornersHeight = (fRadius * 2.0f) + this.SplitWidth;
-				oLeadingRect = new RectangleF (fX, fY, fCornersWidth, fCornersHeight); // left corners
-				oTrailingRect = new RectangleF ((width - fCornersWidth), fY, fCornersWidth, fCornersHeight); // right corners
+				oLeadingRect = new CGRect (fX, fY, fCornersWidth, fCornersHeight); // left corners
+				oTrailingRect = new CGRect ((width - fCornersWidth), fY, fCornersWidth, fCornersHeight); // right corners
 			}
 	
 			oLeadingCorners.Frame = oLeadingRect;
@@ -1313,7 +1313,7 @@ namespace MTSplitViewLib
 			else if (!bInPopover && this.HiddenPopoverController != null && this.BarButtonItem != null)
 			{
 				// I know this looks strange, but it fixes a bizarre issue with UIPopoverController leaving masterViewController's views in disarray.
-				this.HiddenPopoverController.PresentFromRect (RectangleF.Empty, this.View, UIPopoverArrowDirection.Any, false);
+				this.HiddenPopoverController.PresentFromRect (CGRect.Empty, this.View, UIPopoverArrowDirection.Any, false);
 		
 				// Remove master from popover and destroy popover, if it exists.
 				this.HiddenPopoverController.Dismiss (false);

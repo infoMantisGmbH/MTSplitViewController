@@ -8,10 +8,9 @@
 //  https://github.com/mattgemmell/MGSplitViewController
 
 using System;
-using MonoTouch.UIKit;
-using System.Drawing;
-using MonoTouch.Foundation;
-using MonoTouch.CoreGraphics;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 
 namespace MTSplitViewLib
 {
@@ -41,7 +40,7 @@ namespace MTSplitViewLib
 		{
 		}
 		
-		public MTSplitCornersView (RectangleF frame) : base(frame)
+		public MTSplitCornersView (CGRect frame) : base(frame)
 		{
 			this.ContentMode = UIViewContentMode.Redraw;
 			this.UserInteractionEnabled = false;
@@ -51,20 +50,20 @@ namespace MTSplitViewLib
 			this.CornersPosition = MTSplitCornersView.CORNERS_POSITION.LeadingVertical;
 		}
 		
-		private float Deg2Rad(float fDegrees)
+		private nfloat Deg2Rad(nfloat fDegrees)
 		{
 			// Converts degrees to radians.
-			return fDegrees * ((float)Math.PI / 180.0f);
+			return fDegrees * ((nfloat)Math.PI / 180.0f);
 		}
 		
 
-		private float Rad2Deg(float fRadians)
+		private nfloat Rad2Deg(nfloat fRadians)
 		{
 			// Converts radians to degrees.
 			return fRadians * (180f / (float)Math.PI);
 		}
 		
-		public override void Draw (RectangleF rect)
+		public override void Draw (CGRect rect)
 		{
 			// Draw two appropriate corners, with cornerBackgroundColor behind them.
 			if (this.CornerRadius < 0)
@@ -72,10 +71,10 @@ namespace MTSplitViewLib
 				return;
 			}
 			
-			float fMaxX = this.Bounds.GetMaxX();
-			float fMaxY =this.Bounds.GetMaxY();
+			var fMaxX = this.Bounds.GetMaxX();
+			var fMaxY =this.Bounds.GetMaxY();
 			UIBezierPath oPath = new UIBezierPath();
-			PointF oPt = PointF.Empty;
+			CGPoint oPt = CGPoint.Empty;
 			switch (this.CornersPosition)
 			{
 				case CORNERS_POSITION.LeadingVertical: // top of screen for a left/right split
@@ -85,7 +84,7 @@ namespace MTSplitViewLib
 					oPt.X += this.CornerRadius;
 					oPt.Y -= this.CornerRadius;
 					oPath.AddLineTo(oPt);
-					oPath.AddLineTo(PointF.Empty);
+					oPath.AddLineTo(CGPoint.Empty);
 					oPath.ClosePath();;
 			
 					oPt.X = fMaxX - this.CornerRadius;
@@ -189,7 +188,7 @@ namespace MTSplitViewLib
 		oPath.Fill();
 	}
 		
-		public float CornerRadius
+		public nfloat CornerRadius
 		{
 			get
 			{
@@ -204,7 +203,7 @@ namespace MTSplitViewLib
 				}
 			}
 		}
-		private float fCornerRadius;
+		private nfloat fCornerRadius;
 		
 		public MTSplitViewController SplitViewController
 		{

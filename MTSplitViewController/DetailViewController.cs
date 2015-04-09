@@ -9,8 +9,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using UIKit;
 using MTSplitViewLib;
 
 namespace MTSplitViewControllerDemo
@@ -38,13 +38,13 @@ namespace MTSplitViewControllerDemo
 		public override void ViewWillAppear (bool animated)
 		{
 			base.ViewWillAppear (animated);
-			this.oToolbar = new UIToolbar (new RectangleF (0, 0, this.View.Bounds.Width, 44));
+			this.oToolbar = new UIToolbar (new CGRect (0, 0, this.View.Bounds.Width, 44));
 			this.oToolbar.AutoresizingMask = UIViewAutoresizing.FlexibleWidth;
 			this.View.AddSubview (this.oToolbar);
 			
-			this.oDetailDescriptionLabel = new UILabel (new RectangleF (0, 0, this.View.Bounds.Width, 30));
+			this.oDetailDescriptionLabel = new UILabel (new CGRect (0, 0, this.View.Bounds.Width, 30));
 			this.oDetailDescriptionLabel.TextAlignment = UITextAlignment.Center;
-			this.oDetailDescriptionLabel.Center = new PointF (this.View.Bounds.Width / 2, this.View.Bounds.Height / 2);
+			this.oDetailDescriptionLabel.Center = new CGPoint (this.View.Bounds.Width / 2, this.View.Bounds.Height / 2);
 			Console.WriteLine(this.View.Bounds + "; " + this.oDetailDescriptionLabel.Center);
 			this.oDetailDescriptionLabel.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleRightMargin | UIViewAutoresizing.FlexibleLeftMargin;
 			this.View.AddSubview (this.oDetailDescriptionLabel);
@@ -86,13 +86,13 @@ namespace MTSplitViewControllerDemo
     		this.oPopoverController = oPopover;
 		}
 
-		private float HandleConstrainSplitPosition (MTSplitViewController oSplitController, float fProposedPosition, SizeF oViewSize)
+		private nfloat HandleConstrainSplitPosition (MTSplitViewController oSplitController, nfloat fProposedPosition, CGSize oViewSize)
 		{
 			Console.WriteLine("ConstrainSplitPosition(): " + fProposedPosition);
 			return fProposedPosition;
 		}
 
-		private void HandleWillMoveSplitToPosition (MTSplitViewController oSplitControler, float fSplitPos)
+		private void HandleWillMoveSplitToPosition (MTSplitViewController oSplitControler, nfloat fSplitPos)
 		{
 			Console.WriteLine("WillMoveSplitToPosition(): " + fSplitPos);
 		}

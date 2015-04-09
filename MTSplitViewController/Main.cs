@@ -7,7 +7,7 @@
 //  Copyright 2010 Instinctive Code.
 //  https://github.com/mattgemmell/MGSplitViewController
 
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace MTSplitViewControllerDemo
 {

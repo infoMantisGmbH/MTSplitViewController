@@ -8,10 +8,10 @@
 //  https://github.com/mattgemmell/MGSplitViewController
 
 using System;
-using MonoTouch.UIKit;
-using System.Drawing;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
+using UIKit;
+using CoreGraphics;
+using CoreGraphics;
+using Foundation;
 
 namespace MTSplitViewLib
 {
@@ -39,14 +39,14 @@ namespace MTSplitViewLib
 		{
 		}
 		
-		public MTSplitDividerView (RectangleF frame) : base(frame)
+		public MTSplitDividerView (CGRect frame) : base(frame)
 		{
 			this.UserInteractionEnabled = false;
 			this.AllowsDragging = false;
 			this.ContentMode = UIViewContentMode.Redraw;
 		}
 		
-		public override void Draw (RectangleF rect)
+		public override void Draw (CGRect rect)
 		{
 			if (this.SplitViewController.DividerStyle == DIVIDER_STYLE.Thin)
 			{
@@ -55,10 +55,10 @@ namespace MTSplitViewLib
 			else if (this.SplitViewController.DividerStyle == DIVIDER_STYLE.PaneSplitter)
 			{
 				// Draw gradient background.
-				RectangleF oBounds = this.Bounds;
+				CGRect oBounds = this.Bounds;
 				CGColorSpace oRGB = CGColorSpace.CreateDeviceRGB();
-				float[] aLocations = new float[] {0, 1};
-				float[] aComponents = new float[]
+				var aLocations = new nfloat[] {0, 1};
+				var aComponents = new nfloat[]
 				{
 					// light
 					0.988f, 0.988f, 0.988f, 1.0f, 
@@ -67,19 +67,19 @@ namespace MTSplitViewLib
 				};
 				CGGradient oGradient = new CGGradient(oRGB, aComponents, aLocations);
 				CGContext oContext = UIGraphics.GetCurrentContext();
-				PointF oStart;
-				PointF oEnd;
+				CGPoint oStart;
+				CGPoint oEnd;
 				if (this.SplitViewController.IsVertical)
 				{
 					// Light left to dark right.
-					oStart = new PointF(oBounds.GetMinX(), oBounds.GetMidY());
-					oEnd = new PointF(oBounds.GetMaxX(), oBounds.GetMidY());
+					oStart = new CGPoint(oBounds.GetMinX(), oBounds.GetMidY());
+					oEnd = new CGPoint(oBounds.GetMaxX(), oBounds.GetMidY());
 				}
 				else
 				{
 					// Light top to dark bottom.
-					oStart = new PointF(oBounds.GetMidX(), oBounds.GetMinY());
-					oEnd = new PointF(oBounds.GetMidX(), oBounds.GetMaxY());
+					oStart = new CGPoint(oBounds.GetMidX(), oBounds.GetMinY());
+					oEnd = new CGPoint(oBounds.GetMidX(), oBounds.GetMaxY());
 				}
 				oContext.DrawLinearGradient(oGradient, oStart, oEnd, CGGradientDrawingOptions.DrawsAfterEndLocation);
 				oRGB.Dispose();
@@ -89,7 +89,7 @@ namespace MTSplitViewLib
 				float fBorderThickness = 1.0f;
 				UIColor.FromWhiteAlpha(0.7f, 1.0f).SetFill();
 				UIColor.FromWhiteAlpha(0.7f, 1.0f).SetStroke();
-				RectangleF oBorderRect = oBounds;
+				CGRect oBorderRect = oBounds;
 				if (this.SplitViewController.IsVertical)
 				{
 					oBorderRect.Width = fBorderThickness;
@@ -110,10 +110,10 @@ namespace MTSplitViewLib
 			}
 		}
 		
-		private void DrawGripThumbInRect(RectangleF rect)
+		private void DrawGripThumbInRect(CGRect rect)
 		{
-			float fWidth = 9.0f;
-			float fHeight;
+			nfloat fWidth = 9.0f;
+			nfloat fHeight;
 			if (this.SplitViewController.IsVertical)
 			{
 				fHeight = 30.0f;
@@ -125,14 +125,14 @@ namespace MTSplitViewLib
 			}
 	
 			// Draw grip in centred in rect.
-			RectangleF oGripRect = new RectangleF(0, 0, fWidth, fHeight);
+			CGRect oGripRect = new CGRect(0, 0, fWidth, fHeight);
 			oGripRect.X = ((rect.Width - oGripRect.Width) / 2.0f);
 			oGripRect.Y = ((rect.Height - oGripRect.Height) / 2.0f);
 	
-			float stripThickness = 1.0f;
+			nfloat stripThickness = 1.0f;
 			UIColor oStripColor = UIColor.FromWhiteAlpha(0.35f, 1.0f);
 			UIColor oLightColor = UIColor.FromWhiteAlpha(1.0f, 1.0f);
-			float fSpace = 3.0f;
+			nfloat fSpace = 3.0f;
 			if (this.SplitViewController.IsVertical)
 			{
 				oGripRect.Width = stripThickness;
@@ -213,14 +213,14 @@ namespace MTSplitViewLib
 			}
 		}
 		
-		public override void TouchesMoved (MonoTouch.Foundation.NSSet touches, UIEvent evt)
+		public override void TouchesMoved (NSSet touches, UIEvent evt)
 		{
 			UITouch oTouch = touches.AnyObject as UITouch;
 			if (oTouch != null)
 			{
-				PointF oLastPt = oTouch.PreviousLocationInView(this);
-				PointF oPt = oTouch.LocationInView(this);
-				float fOffset = (this.SplitViewController.IsVertical) ? oPt.X - oLastPt.X : oPt.Y - oLastPt.Y;
+				CGPoint oLastPt = oTouch.PreviousLocationInView(this);
+				CGPoint oPt = oTouch.LocationInView(this);
+				var fOffset = (this.SplitViewController.IsVertical) ? oPt.X - oLastPt.X : oPt.Y - oLastPt.Y;
 				if (!this.SplitViewController.MasterBeforeDetail)
 				{
 					fOffset = -fOffset;
