@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -8,10 +8,9 @@
     <ProjectGuid>{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>MTSplitViewController</RootNamespace>
-    <AssemblyName>MTSplitViewController</AssemblyName>
+    <RootNamespace>MTSplitViewControllerDemo</RootNamespace>
+    <AssemblyName>MTSplitViewControllerDemo</AssemblyName>
     <TargetFrameworkIdentifier>Xamarin.iOS</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -74,9 +73,11 @@
     <Compile Include="DetailViewController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MTSplitViewLib\MTSplitViewLib\MTSplitViewLib.csproj">
-      <Project>{86B4F178-F272-4404-8CF5-140A5A84CBC2}</Project>
+    <ProjectReference Include="..\MTSplitViewLib\MTSplitViewLib.csproj">
+      <Project>{86b4f178-f272-4404-8cf5-140a5a84cbc2}</Project>
       <Name>MTSplitViewLib</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

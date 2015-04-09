@@ -1,34 +1,53 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTSplitViewController", "MTSplitViewController\MTSplitViewController.csproj", "{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTSplitViewControllerDemo", "MTSplitViewControllerDemo\MTSplitViewControllerDemo.csproj", "{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTSplitViewLib", "MTSplitViewLib\MTSplitViewLib\MTSplitViewLib.csproj", "{86B4F178-F272-4404-8CF5-140A5A84CBC2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTSplitViewLib", "MTSplitViewLib\MTSplitViewLib.csproj", "{86B4F178-F272-4404-8CF5-140A5A84CBC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|iPhoneSimulator = Debug|iPhoneSimulator
-		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|Any CPU = Debug|Any CPU
 		Debug|iPhone = Debug|iPhone
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Release|Any CPU = Release|Any CPU
 		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Release|Mixed Platforms = Release|Mixed Platforms
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Release|iPhone.Build.0 = Release|Any CPU
-		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
 		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Debug|iPhone.Build.0 = Debug|iPhone
 		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Debug|Mixed Platforms.ActiveCfg = Debug|iPhone
+		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Debug|Mixed Platforms.Build.0 = Debug|iPhone
+		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
 		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Release|iPhone.ActiveCfg = Release|iPhone
 		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Release|iPhone.Build.0 = Release|iPhone
 		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Release|Mixed Platforms.ActiveCfg = Release|iPhone
+		{F9F6FA20-0DBC-446B-BFC4-B0190D530F18}.Release|Mixed Platforms.Build.0 = Release|iPhone
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{86B4F178-F272-4404-8CF5-140A5A84CBC2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = MTSplitViewController\MTSplitViewController.csproj
