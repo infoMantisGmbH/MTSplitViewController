@@ -9,6 +9,7 @@
 //  https://github.com/mattgemmell/MGSplitViewController
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using CoreGraphics;
 using Foundation;
 using UIKit;
@@ -698,7 +699,9 @@ namespace MTSplitViewLib
 		}
 
 		[Obsolete]
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
 		public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
 		{
 			return true;
 		}
